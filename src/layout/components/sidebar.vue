@@ -11,10 +11,10 @@
 </template>
 <script>
 import sideItem from './sideItem.vue'
-import menus from '@/utils/menu' //菜单数据
+import menus from '@/utils/menu' // 菜单数据
 export default {
     name: 'sidebar',
-    components:{
+    components: {
         sideItem
     },
     data() {

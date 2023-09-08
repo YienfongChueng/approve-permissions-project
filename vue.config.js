@@ -7,7 +7,7 @@ module.exports = defineConfig({
     proxy: {
       '/api': {
         target: 'http://49.235.128.49:5058',
-        changeOrigin: true,
+        changeOrigin: true
         // pathRewrite: {
         //   '^/api':  ''
         // }
@@ -17,7 +17,7 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "~@/styles/variable.scss";`
+        additionalData: '@import "~@/styles/variable.scss";'
       }
     }
   }

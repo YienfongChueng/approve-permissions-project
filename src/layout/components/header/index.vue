@@ -29,7 +29,7 @@
 <script>
 import Breadcrumb from './breadcrumb.vue'
 import { removeToken } from '@/utils/auth'
-import { logoutApi, userInfo } from '@/api/modules/user.js'
+import { logoutApi } from '@/api/modules/user.js'
 export default {
     components: { Breadcrumb },
     data() {
@@ -45,9 +45,6 @@ export default {
     methods: {
         getUserInfo() {
             this.loginUser = JSON.parse(localStorage.getItem('loginUser') || {})
-            // userInfo().then(res => {
-            //     console.log(res)
-            // })
         },
         handleCommand(command) {
             if (command === 'logout') {
