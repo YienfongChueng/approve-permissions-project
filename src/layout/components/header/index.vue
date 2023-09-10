@@ -65,7 +65,9 @@ export default {
 <style lang="scss" scoped>
 .app-breadcrumb {
     padding: 0 10px;
-    background: #e5e9ec;
+    // background: #e5e9ec;
+    background: #f2f4f5;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
     &> .right-menu{
         float: right;
         height: $headerHeight;

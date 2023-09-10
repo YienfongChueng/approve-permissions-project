@@ -17,9 +17,9 @@
   </div>
 </template>
 <script>
-import {Header,Sidebar,Main} from './components/index.js'
+import { Header, Sidebar, Main } from './components/index.js'
 export default {
-    components: {Header,Sidebar,Main},
+    components: { Header, Sidebar, Main },
     data() {
         return {
 
