@@ -57,7 +57,6 @@
            <div class="card-panel"><Map /></div>
         </el-col>
       </el-row>
-
   </div>
 </template>
 <script>

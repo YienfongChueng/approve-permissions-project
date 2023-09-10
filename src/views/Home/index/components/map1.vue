@@ -95,11 +95,12 @@ export default {
                         period: 4,
                         trailLength: 0.2,
                         symbol: 'arrow',
+                        symbolSize: 8,
                         color: '#29bce1'
                     },
                     lineStyle: {
                         color: '#29bce1',
-                        width: 2,
+                        width: 1,
                         curveness: 0.3,
                         opacity: 0.5
                     },
