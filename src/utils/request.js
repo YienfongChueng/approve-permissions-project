@@ -9,7 +9,6 @@ const service = axios.create({
 
 // 拦截请求
 service.interceptors.request.use(config => {
-    console.log('请求拦截：', config)
     config.headers.token = getToken('token')
     return config
 }, err => {

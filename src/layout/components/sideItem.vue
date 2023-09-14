@@ -19,6 +19,6 @@
 <script>
 export default {
     name: 'sideItem',
-    props: ['item'],
+    props: ['item']
 }
 </script>
