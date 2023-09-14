@@ -2,12 +2,12 @@
     <el-breadcrumb separator="/">
         <span>
             <i class="el-icon-s-home"></i>
-            当前位置：
+            {{$t('message.location')}}：
         </span>
         <el-breadcrumb-item
             v-for="v in breadcrumd"
             :key="v.path">
-            <router-link :to="v.path">{{v.meta.title}}</router-link>
+            <router-link :to="v.path">{{$t('message')[v.name]}}</router-link>
         </el-breadcrumb-item>
         
     </el-breadcrumb>

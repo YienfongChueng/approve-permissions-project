@@ -1,7 +1,7 @@
 <template>
     <el-aside width="200px" class="aside">
         <div class="title">
-            审批流程权限系统
+            {{$t('message.title')}}
         </div>
         <el-menu
             router

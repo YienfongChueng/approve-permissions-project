@@ -4,26 +4,26 @@
         <Breadcrumb />
         <!-- 右侧按钮 -->
         <div class="right-menu clearfix">
-            <span class="user-name">{{loginUser.account}}</span>
+             <!-- 国际化 -->
+            <el-switch class="switch_lang"
+                v-model="lang"
+                :active-text="$t('message.cn')"
+                :inactive-text="$t('message.en')"
+                active-value="cn"
+                inactive-value="en"
+                @change="changeLang">
+            </el-switch>
+            <!-- 用户信息 -->
+            <span class="user_name">{{loginUser.account}}</span>
             <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
                     <el-avatar class="user"> user </el-avatar>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
-                    <el-dropdown-item command="setLanguage">国际化</el-dropdown-item>
+                    <el-dropdown-item command="logout">{{$t('message.logout')}}</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
-        <!-- 国际化 -->
-        <el-drawer
-            title="设置系统语言"
-            :visible.sync="drawer"
-            :with-header="true"
-            :before-close="handleDrawerClose">
-            <span>设置系统语言todo</span>
-        </el-drawer>
-
     </div>
 </template>
 <script>
@@ -35,12 +35,13 @@ export default {
     data() {
         return {
             loginUser: {},
-            drawer: false
+            lang: 'cn'
 
         }
     },
     mounted() {
         this.getUserInfo()
+        this.initI18n()
     },
     methods: {
         getUserInfo() {
@@ -52,13 +53,15 @@ export default {
                     removeToken()
                     this.$router.push('/login')
                 })
-            } else if (command === 'setLanguage') {
-                this.drawer = true
             }
         },
-        handleDrawerClose() {
-            this.drawer = false
+        initI18n() {
+            this.$i18n.locale = this.lang
+        },
+        changeLang(lang) {
+            this.$i18n.locale = lang
         }
+       
     }
 }
 </script>
@@ -72,7 +75,7 @@ export default {
         float: right;
         height: $headerHeight;
     }
-    .user-name {
+    .user_name {
         vertical-align: text-bottom;
         color: #534f4f;
         font-weight: 500;
@@ -88,6 +91,9 @@ export default {
      .el-dropdown-link {
         cursor: pointer;
         color: #409EFF;
+    }
+    .switch_lang {
+        bottom: 20px
     }
   }
 </style>
