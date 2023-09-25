@@ -29,7 +29,7 @@ export default {
     },
     mounted() {
         queryEmployeMap().then(res => {
-            this.lists = res
+            this.lists = res.data
             this.init()
         })
     },

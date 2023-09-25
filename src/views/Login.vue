@@ -59,13 +59,13 @@ export default {
         // 通过
         const user = Object.assign({}, this.ruleForm, { password: md5(this.ruleForm.password) })
         loginApi(user).then(res => {
-          if (res.status) {
+          if (res.data.status) {
             // 登陆成功
             this.$message.success('登录成功！')
             // 保存token
-            setToken(res.token)
+            setToken(res.data.token)
             // 保存user信息
-            localStorage.setItem('loginUser', JSON.stringify(res))
+            localStorage.setItem('loginUser', JSON.stringify(res.data))
             // 跳转首页
             this.$router.push('/index')
           }

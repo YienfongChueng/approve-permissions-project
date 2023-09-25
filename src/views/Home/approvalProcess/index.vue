@@ -1,20 +1,25 @@
 <template>
-  <div class="about">
-    <router-view />
+  <div>
+    <el-card>
+      <router-view />
+    </el-card>
   </div>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
 
     }
   },
-  methods:{
+  methods: {
 
   }
 }
 </script>
+<style lang="scss" scoped>
+
+</style>
 
 

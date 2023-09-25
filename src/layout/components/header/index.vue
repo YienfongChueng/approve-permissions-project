@@ -28,7 +28,7 @@
 </template>
 <script>
 import Breadcrumb from './breadcrumb.vue'
-import { removeToken } from '@/utils/auth'
+import { removeToken, getToken } from '@/utils/auth'
 import { logoutApi } from '@/api/modules/user.js'
 export default {
     components: { Breadcrumb },
@@ -49,6 +49,11 @@ export default {
         },
         handleCommand(command) {
             if (command === 'logout') {
+                if (!getToken()) {
+                    this.$message.error('登陆已过期，请重新登录!')
+                    this.$router.push('/login')
+                    return
+                }
                 logoutApi().then(res => {
                     removeToken()
                     this.$router.push('/login')
