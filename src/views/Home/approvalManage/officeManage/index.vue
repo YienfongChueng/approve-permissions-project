@@ -5,7 +5,7 @@
       <el-form-item>
         <el-input
           size="small"
-          v-model="queryForm.name"
+          v-model.trim="queryForm.name"
           clearable
           prefix-icon="el-icon-search"
           placeholder="请输入用户名搜索"
@@ -13,7 +13,7 @@
           width="200px"></el-input>
       </el-form-item>
       <el-form-item style="float: right">
-        <el-button type="primary" icon="el-icon-plus" @click="handleAdd()">新 增</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="handleAdd()">申 请</el-button>
       </el-form-item>
     </el-form>
 
@@ -63,58 +63,58 @@
       :sizes.sync="queryForm.pageSize"
       @action="getList"/>
 
-      <Dialog
-        title="申请管理-办公审批-删除"
-        btnText="删 除"
-        :visible.sync="delVisible"
-        @confirm="delData">
-        <span>确定删除？</span>
-      </Dialog>
+    <Dialog
+      title="申请管理-办公审批-删除"
+      btnText="删 除"
+      :visible.sync="delVisible"
+      @confirm="delData">
+      <span>确定删除？</span>
+    </Dialog>
 
-      <Dialog
-        :title="`申请管理-办公审批-${addOrEditTitle}`"
-        :visible.sync="editVisible"
-        @confirm="submitData">
-        <el-form
-          :model="temp"
-          :rules="applyRules"
-          ref="applyForm"
-          label-width="100px"
-          >
-          <el-form-item label="申请人" prop="applicant">
-            <el-select  :disabled="!!temp.id" v-model="temp.applicant" placeholder="请选择申请人">
-              <el-option
-                v-for="account in accountList"
-                :key="account.id"
-                :label="account.account"
-                :value="account.id"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item  label="申请日期" prop="created">
-            <el-date-picker
-              :disabled="!!temp.id"
-              type="date"
-              placeholder="选择日期"
-              v-model="temp.created"
-              ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="申请商品" prop="apply_goods">
-            <el-select v-model="temp.apply_goods" placeholder="请选择申请商品">
-              <el-option
-                v-for="goods in applyGoodsList"
-                :key="goods.value"
-                :label="goods.value"
-                :value="goods.value"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="申请数量" prop="apply_goods_num">
-            <el-input-number v-model="temp.apply_goods_num" :min="1" :max="10" label="申请数量"></el-input-number>
-          </el-form-item>
-          <el-form-item label="申请原因" prop="apply_reason">
-            <el-input type="textarea" v-model="temp.apply_reason" style="width: 300px"></el-input>
-          </el-form-item>
-        </el-form>
-      </Dialog>
+    <Dialog
+      :title="`申请管理-办公审批-${addOrEditTitle}`"
+      :visible.sync="editVisible"
+      @confirm="submitData">
+      <el-form
+        :model="temp"
+        :rules="applyRules"
+        ref="applyForm"
+        label-width="100px"
+        >
+        <el-form-item label="申请人" prop="applicant">
+          <el-select  :disabled="!!temp.id" v-model="temp.applicant" placeholder="请选择申请人">
+            <el-option
+              v-for="account in accountList"
+              :key="account.id"
+              :label="account.account"
+              :value="account.id"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item  label="申请日期" prop="created">
+          <el-date-picker
+            :disabled="!!temp.id"
+            type="date"
+            placeholder="选择日期"
+            v-model="temp.created"
+            ></el-date-picker>
+        </el-form-item>
+        <el-form-item label="申请商品" prop="apply_goods">
+          <el-select v-model="temp.apply_goods" placeholder="请选择申请商品">
+            <el-option
+              v-for="goods in applyGoodsList"
+              :key="goods.value"
+              :label="goods.value"
+              :value="goods.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="申请数量" prop="apply_goods_num">
+          <el-input-number v-model="temp.apply_goods_num" :min="1" :max="10" label="申请数量"></el-input-number>
+        </el-form-item>
+        <el-form-item label="申请原因" prop="apply_reason">
+          <el-input type="textarea" v-model="temp.apply_reason" style="width: 300px"></el-input>
+        </el-form-item>
+      </el-form>
+    </Dialog>
   </div>
 </template>
 <script>

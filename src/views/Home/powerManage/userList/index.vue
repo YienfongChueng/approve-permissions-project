@@ -12,9 +12,6 @@
           v-model.trim="queryForm.name"
           @change="getList"/>
       </el-form-item>
-      <el-form-item style="float: right">
-        <el-button type="primary" icon="el-icon-right" @click="go()">去申请</el-button>
-      </el-form-item>
     </el-form>
     <!-- 表格数据 -->
     <el-table
@@ -29,26 +26,17 @@
         width="50">
       </el-table-column>
       <el-table-column
-        v-for="item in travelColumn"
+        v-for="item in userListColumn"
         :key="item.key"
         :label="item.label"
         :prop="item.key"
         :width="item.width">
         <template v-slot="{row}">
-          <div v-if="item.key === 'created'">
+          <div v-if="item.key === 'reg_time'">
             {{row[item.key] | formatDate}}
           </div>
-          <div v-else-if="item.key === 'status'">
-            <el-tag size="mini" :type="row[item.key] | statusColorFilters">
-            {{row[item.key] | statusFilters}}
-            </el-tag>
-          </div>
-          <div v-else-if="item.key === 'bill_path'">
-            <el-image
-              style="width: 100px; height: 100px"
-              :src="url + row[item.key]"
-              :preview-src-list="[url + row[item.key]]">
-            </el-image>
+          <div v-else-if="item.key === 'role_name'">
+            {{roleNameObj[row[item.key]] || '--'}}
           </div>
           <div v-else>
             {{ row[item.key] !=null ? row[item.key] : "--" }}
@@ -57,9 +45,7 @@
       </el-table-column>
       <el-table-column label="操作" width="250px">
         <template v-slot="{row}">
-          <el-button size="small" type="primary" :disabled="btnStatusList.indexOf(row.status) == -1" @click="handleEdit(row)">编辑</el-button>
-          <el-button size="small" type="danger" :disabled="btnStatusList.indexOf(row.status) == -1" @click="handleDel(row)">删除</el-button>
-          <el-button size="small" type="success" :disabled="btnStatusList.indexOf(row.status) == -1" @click="handleSubmit(row)">提交</el-button>
+          <el-button size="small" type="danger" @click="handleDel(row)">删除</el-button>
         </template>
       </el-table-column>
 
@@ -73,23 +59,17 @@
 
     <!-- 弹窗 -->
     <Dialog
-      title="申请管理-差旅审批-删除"
+      title="权限管理-员工与审批员列表-删除"
       btnText="删 除"
       :visible.sync="delVisible"
       @confirm="delData">
       <span>确定删除？</span>
     </Dialog>
-    <Dialog
-      title="申请管理-差旅审批-编辑"
-      :visible.sync="editVisible"
-      @confirm="editData">
-      <span>todo编辑</span>
-    </Dialog>
   </div>
 </template>
 <script>
-import { applyTravelList, applyTravelDelete, applyTravelSubmit } from '@/api/modules/travel.js'
-import { travelColumn } from '@/utils/tableColumn.js'
+import { userList, delUser } from '@/api/modules/permission.js'
+import { userListColumn } from '@/utils/tableColumn.js'
 import Dialog from '@/components/Dialog.vue'
 export default {
   components: {
@@ -97,9 +77,7 @@ export default {
   },
   data() {
     return {
-      url: process.env.VUE_APP_protalurl + '/',
-      travelColumn,
-      btnStatusList: [0, 3, 6, 9], // 可编辑/删除/提交的状态
+      userListColumn,
       queryForm: {
         name: '',
         pageNo: 1,
@@ -108,23 +86,23 @@ export default {
       total: 0,
       tableData: [],
       delVisible: false,
-      editVisible: false,
-      temp: {}
-
+      temp: {},
+      roleNameObj: {
+          administrator: '超级管理员',
+          approve: '企业审批管理员',
+          input: '企业员工'
+      }
     }
   },
   methods: {
     getList() {
-      applyTravelList(this.queryForm).then(res => {
+      userList(this.queryForm).then(res => {
         this.tableData = res.data.list
         this.total = res.data.rows
       })
     },
-    go() {
-      this.$router.push('/approvalApply/travelApply')
-    },
     delData() {
-      applyTravelDelete(this.temp.id).then(res => {
+      delUser(this.temp.id).then(res => {
         this.$message.success('删除成功')
         this.delVisible = false
         this.getList()
@@ -132,27 +110,10 @@ export default {
         this.$message.error(err)
       })
     },
-    editData() {
-      // todo
-      this.editVisible = false
-    },
     handleDel(row) {
       this.temp = { ...row }
       this.delVisible = true
-    },
-    handleEdit(row) {
-      this.temp = { ...row }
-      this.editVisible = true
-    },
-    handleSubmit(row) {
-      applyTravelSubmit({ id: row.id }).then(res => {
-        this.$message.success('提交成功!')
-        this.getList()
-      }).catch(err => {
-         this.$message.error(err)
-      })
     }
-    
   },
   mounted() {
     this.getList()

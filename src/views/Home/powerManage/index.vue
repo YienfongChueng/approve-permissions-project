@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>权限管理</h1>
+    <el-card>
+      <router-view />
+    </el-card>
   </div>
 </template>
 <script>
@@ -12,7 +14,7 @@ export default {
   },
   methods: {
     
-  },
+  }
 
 }
 </script>

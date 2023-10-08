@@ -60,3 +60,41 @@ export function statusColorFilters(val) {
             return 'warning'
     }
 }
+
+// 审批类别
+export function checkTypeFilters(val) {
+    switch (val) {
+        case 1:
+            return '办公审批'
+        case 2:
+            return '差旅审批'
+        case 3:
+            return '请假审批'
+    
+        default:
+            return val
+    }
+}
+// 审批类别样式
+export function checkTypeColorFilters(val) {
+    switch (val) {
+        case 1:
+            return 'success'
+        case 2:
+            return 'warning'
+        case 3:
+            return 'danger'
+        default:
+            return val
+    }
+}
+export function checkResult(val) {
+    switch (val) {
+        case 'pass':
+            return '通过'
+        case 'reject':
+            return '拒绝'
+        default:
+            return '未审批'
+    }
+}

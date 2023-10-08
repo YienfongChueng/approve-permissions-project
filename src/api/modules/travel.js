@@ -9,7 +9,7 @@ export function applyTravelList(params = {}) {
 
 // 差旅审批-创建&编辑
 export function applyTravelCreate(data = {}) {
-    return http.post(`${prefix}/createOrUpd`, data)
+    return http.upload(`${prefix}/createOrUpd`, data)
 }
 
 // 差旅审批-删除

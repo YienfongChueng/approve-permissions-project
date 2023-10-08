@@ -46,7 +46,7 @@
 </template>
 <script>
 import { queryEmploye } from '@/api/modules/user.js'
-import { applyOfficeList, applyOfficeCreate } from '@/api/modules/office.js'
+import { applyOfficeCreate } from '@/api/modules/office.js'
 import { applyGoodsList } from '@/utils/select.js'
 export default {
   data() {
@@ -55,6 +55,7 @@ export default {
       accountList: [],
       applyForm: {
         applicant: '',
+        created: '',
         apply_goods: '',
         apply_goods_num: 1,
         apply_reason: ''

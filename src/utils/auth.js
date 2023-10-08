@@ -1,4 +1,4 @@
-const tokenKey = "approvalPerssionToken"
+const tokenKey = 'approvalPerssionToken'
 
 export function getToken() {
     return localStorage.getItem(tokenKey)

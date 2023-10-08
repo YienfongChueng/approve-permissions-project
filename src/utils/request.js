@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
+import { env } from 'echarts'
 
 const service = axios.create({
-    baseURL: '/api',
+    baseURL: process.env.VUE_APP_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/api',
     timeout: 5000
 })
 
