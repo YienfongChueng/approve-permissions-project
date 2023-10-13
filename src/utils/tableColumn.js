@@ -40,6 +40,7 @@ export const docColumn = [
 
 export const userListColumn = [
     { key: 'account', label: '用户名' },
+    { key: 'password', label: '密码' },
     { key: 'creator', label: '创建人' },
     { key: 'reg_time', label: '创建时间' },
     { key: 'role_name', label: '角色' }

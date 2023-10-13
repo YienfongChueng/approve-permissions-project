@@ -49,4 +49,3 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### todo待完善
 1. 审批管理（请假&差旅）编辑功能待做
 2. 通过人员名称查询bug，翻页后再进行名称搜索查询，没有重置分页条件。比如翻到第5页后进行名称查询，可能会返回空数据的情况
-3. 

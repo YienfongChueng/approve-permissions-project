@@ -4,7 +4,8 @@ export default [
         url: '/index',
         icon: 'el-icon-s-home',
         name: 'index',
-        component: 'index'
+        component: 'index',
+        roles: ['input', 'approve']
     },
     {
       title: '申请类别',
@@ -13,6 +14,7 @@ export default [
       name: 'approvalApply',
       component: 'approvalApply',
       redirect: '/approvalApply/officeApply',
+      roles: ['input'],
       children: [
         {
             title: '办公审批',
@@ -44,6 +46,7 @@ export default [
         name: 'approvalManage',
         component: 'approvalManage',
         redirect: '/approvalManage/officeManage',
+        roles: ['input'],
         children: [
             {
                 title: '办公审批',
@@ -75,27 +78,31 @@ export default [
         name: 'approvalProcess',
         component: 'approvalProcess',
         redirect: '/approvalProcess/firstInstance',
+        roles: ['approve'],
         children: [
             {
                 title: '一审',
                 url: '/approvalProcess/firstInstance',
                 icon: 'el-icon-tickets',
                 name: 'firstInstance',
-                component: 'approvalProcess/firstInstance'
+                component: 'approvalProcess/firstInstance',
+                permission: ['one']
             },
             {
                 title: '二审',
                 url: '/approvalProcess/secondInstance',
                 icon: 'el-icon-document',
                 name: 'secondInstance',
-                component: 'approvalProcess/secondInstance'
+                component: 'approvalProcess/secondInstance',
+                permission: ['two']
             },
             {
                 title: '终审',
                 url: '/approvalProcess/lastInstance',
                 icon: 'el-icon-document-checked',
                 name: 'lastInstance',
-                component: 'approvalProcess/lastInstance'
+                component: 'approvalProcess/lastInstance',
+                permission: ['end']
             }
         ]
     },
@@ -104,7 +111,8 @@ export default [
         url: '/fileManage',
         icon: 'el-icon-s-order',
         name: 'fileManage',
-        component: 'fileManage'
+        component: 'fileManage',
+        roles: ['input']
     },
     {
         title: '权限管理',

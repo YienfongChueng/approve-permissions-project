@@ -6,7 +6,7 @@
         </span>
         <el-breadcrumb-item
             v-for="v in breadcrumd"
-            :key="v.path">
+            :key="v.name">
             <router-link :to="v.path">{{$t('message')[v.name]}}</router-link>
         </el-breadcrumb-item>
         

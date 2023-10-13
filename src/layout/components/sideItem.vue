@@ -12,7 +12,7 @@
                 <i :class="item.icon"></i>
                 <span>{{$t('message')[item.name]}}</span>
             </template>
-            <sideItem v-for="sub in item.children" :key="sub.url" :item="sub"/>
+            <sideItem v-for="sub in item.children" :key="sub.name" :item="sub"/>
         </el-submenu>
     </div>
 </template>

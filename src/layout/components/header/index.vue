@@ -29,7 +29,6 @@
 <script>
 import Breadcrumb from './breadcrumb.vue'
 import { removeToken, getToken } from '@/utils/auth'
-import { logoutApi } from '@/api/modules/user.js'
 export default {
     components: { Breadcrumb },
     data() {
@@ -54,10 +53,7 @@ export default {
                     this.$router.push('/login')
                     return
                 }
-                logoutApi().then(res => {
-                    removeToken()
-                    this.$router.push('/login')
-                })
+                this.$store.dispatch('user/LOGOUT')
             }
         },
         initI18n() {

@@ -8,8 +8,10 @@ import '@/styles/index.scss'
 
 import i18n from '@/i18n/i18n.js' // 国际化
 
-import '@/components/global' //   注册全局组件
+import './permission' // 路由拦截
+import '@/components/global' // 注册全局组件
 import '@/filters' // 全局过滤器
+
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

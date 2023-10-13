@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
-import { env } from 'echarts'
+import store from '@/store'
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/api',
@@ -21,9 +21,17 @@ service.interceptors.response.use(response => {
     if (code !== 20000) {
         if (code === 401) {
             Message({ message: msg || '暂无权限!', type: 'error' })
-            // 返回到登陆页面 todo
-            this.$router.push('/index')
-            // return Promise.reject(msg)
+            // 返回到登陆页面
+            store.dispatch('user/TO_LOGIN_PAGE')
+            return Promise.reject(msg)
+        } else if (code === 10000) {
+            Message({
+                message: msg || '服务器不给力!',
+                type: 'error',
+                duration: 2000
+            })
+            store.dispatch('user/TO_LOGIN_PAGE')
+            return Promise.reject(msg)
         } else {
             Message({
                 message: msg || '服务器不给力!',
