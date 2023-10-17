@@ -8,7 +8,7 @@
             :default-active="$route.path"
             exact
             class="el-menu-vertical-demo">
-            <sideItem v-for="item in get_routes" :key="item.url" :item="item"/>
+            <sideItem v-for="item in get_menus" :key="item.url" :item="item"/>
       </el-menu>
     </el-aside>
 </template>
@@ -26,7 +26,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('permission', ['get_routes'])
+        ...mapGetters('permission', ['get_menus'])
     }
 }
 </script>

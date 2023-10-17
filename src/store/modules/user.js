@@ -17,7 +17,6 @@ const actions = {
     GET_USER_ROLES({ commit }) {
         return new Promise((resolve, reject) => {
             userInfo().then(res => {
-                console.log(res.data)
                 const { data } = res
                 commit('SET_ROLES', data.roles) // //获取数据 缓存在vuex
                 resolve(data.roles)
@@ -40,7 +39,6 @@ const actions = {
     },
     TO_LOGIN_PAGE({ commit }) {
         return new Promise((resolve, reject) => {
-            console.log(1111)
             commit('SET_ROLES', []) // 清空角色
             removeToken() // 清空token
             router.push('/login') // 返回登陆页

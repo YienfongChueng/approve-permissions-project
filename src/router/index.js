@@ -21,7 +21,6 @@ export const routes = [
   },
   {
     path: '/layout', // 项目布局
-    name: 'layout',
     meta: { title: '企业首页' },
     component: () => import(/* webpackChunkName: "layout" */ '@/layout/index.vue'),
     redirect: '/index',
@@ -36,7 +35,8 @@ export const routes = [
 ]
 
 const createRouter = () => new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 const router = createRouter()
 

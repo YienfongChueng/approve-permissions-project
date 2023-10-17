@@ -1,10 +1,28 @@
 
 /**
+ * 根据角色和审批权限数据进行过滤原始数据，返沪过滤后的路由数据
+ * @param {*} menus 原始数据
+ * @param {*} rolesName 角色数据
+ * @param {*} permissions 审批权限数据
+ * @returns
+ */
+export function filterRouter(menus, rolesName, permissions) {
+  const result = menus.filter(item => {
+    if (item.name === 'approvalProcess' && permissions) {
+      const list = permissions.split(',')
+      item.children = item.children.filter(v => list.some(p => v.permission.includes(p)))
+    }
+    return item.roles && rolesName.some(d => item.roles.includes(d))
+  })
+  return result
+}
+
+/**
  * 根据原始数据进行递归动态生成路由数据
  * @param {*} data 原始数据
  * @param {*} dest 目标路由数据
  */
-export function initRoutes(data, dest) {
+ export function initRoutes(data, dest) {
   data.forEach(item => {
     const routerObj = {
       path: item.url,
@@ -25,23 +43,6 @@ export function initRoutes(data, dest) {
   })
 }
 
-/**
- * 根据角色和审批权限数据进行过滤原始数据，返沪过滤后的路由数据
- * @param {*} menus 原始数据
- * @param {*} rolesName 角色数据
- * @param {*} permissions 审批权限数据
- * @returns
- */
-export function filterRouter(menus, rolesName, permissions) {
-  const result = menus.filter(item => {
-    if (item.name === 'approvalProcess' && permissions) {
-      const list = permissions.split(',')
-      item.children = item.children.filter(v => list.some(p => v.permission.includes(p)))
-    }
-    return item.roles && rolesName.some(d => item.roles.includes(d))
-  })
-  return result
-}
 // 另一种写法
 // export function initRoutes(data, subData) {
 //     data.forEach(item => {
