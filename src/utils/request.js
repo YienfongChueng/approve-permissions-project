@@ -2,7 +2,8 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
 import store from '@/store'
-
+console.log(process.env.VUE_APP_ENV === 'production', process.env.VUE_APP_ENV)
+console.log(process.env.VUE_APP_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/api')
 const service = axios.create({
     baseURL: process.env.VUE_APP_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/api',
     timeout: 5000
