@@ -5,7 +5,7 @@ const path = require('path')
 module.exports = defineConfig({
   transpileDependencies: true, // 设置为true 高级语法向下兼容，false 不会
   productionSourceMap: false, // 设置为false,减少包大小，压缩处理等，不利于调试
-  lintOnSave: false,
+  lintOnSave: process.env.NODE_ENV !== 'production',
   devServer: {
     open: false,
     proxy: {
