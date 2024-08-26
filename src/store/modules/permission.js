@@ -22,7 +22,7 @@ const actions = {
             const permissions = rolesArr[0].permission
             // 3. 动态生成路由数据
             let filterData = []
-            const menuTemp = deepClone([], menus)
+            const menuTemp = deepClone([], menus) // ！！需要深拷贝，不然菜单展示有问题
             if (rolesName.includes('administrator')) {
                 // 管理员
                 filterData = menuTemp

@@ -6,16 +6,19 @@
  * @param {*} permissions 审批权限数据
  * @returns
  */
+
 export function filterRouter(menus, rolesName, permissions) {
   const result = menus.filter(item => {
     if (item.name === 'approvalProcess' && permissions) {
       const list = permissions.split(',')
       item.children = item.children.filter(v => list.some(p => v.permission.includes(p)))
     }
+    // ['one','two','end'].some(p => ['one'].include(p))
     return item.roles && rolesName.some(d => item.roles.includes(d))
   })
   return result
 }
+
 
 /**
  * 根据原始数据进行递归动态生成路由数据

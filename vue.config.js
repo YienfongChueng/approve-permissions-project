@@ -4,7 +4,7 @@ const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 const path = require('path')
 module.exports = defineConfig({
   transpileDependencies: true, // 设置为true 高级语法向下兼容，false 不会
-  productionSourceMap: false, // 设置为false,减少包大小，压缩处理等，不利于调试
+  productionSourceMap: process.env.NODE_ENV === 'production', // 设置为false,减少包大小，压缩处理等，不利于调试
   lintOnSave: process.env.NODE_ENV !== 'production',
   devServer: {
     open: false,
@@ -31,7 +31,7 @@ module.exports = defineConfig({
   // 配置webpack
   configureWebpack: {
     // 排除三方包
-    externals: { // {key:value}
+    externals: { // {key:value} key 是用于import的
         // 'vue': 'Vue',
         // "element-ui": 'ELEMENT'
     },
@@ -41,6 +41,8 @@ module.exports = defineConfig({
             test: /\.js$|\.css$/, // 匹配文件名
             threshold: 10240 // 阈值  代表大于设置值生成压缩文件
         }),
+        // 目的就是将不怎么需要更新的第三方库脱离webpack打包，不被打入bundle中，
+        // 从而减少打包时间，但又不影响运用第三方库的方式，例如import方式等
         new HtmlWebpackExternalsPlugin({ // 内网打包
           externals: [
             {
